@@ -5,10 +5,12 @@ import Login from "./components/Login";
 import ProtectedRoute from "./components/ProtectedRoute";
 import TaskForm from "./components/TaskForm";
 import TaskList from "./components/TaskList";
+import Navbar from "./components/Navbar";
 
 function App() {
   return (
     <Router>
+      <Navbar />
       <Routes>
         <Route path="/login" Component={Login} />
         <Route path="/signup" Component={Signup} />

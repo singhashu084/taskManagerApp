@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { signin } from "../redux/actions/auth";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -20,16 +20,16 @@ const Login = () => {
     });
   };
 
-    useEffect(() => {
-      console.log("state", state);
-    }, [state]);
+  useEffect(() => {
+    console.log("state", state);
+  }, [state]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      dispatch(signin(formData))
+      dispatch(signin(formData));
       //   localStorage.setItem("token", token);
-      navigate("/tasks");
+      //   navigate("/tasks");
     } catch (error) {
       console.log(error);
     }
@@ -75,6 +75,12 @@ const Login = () => {
           >
             Login
           </button>
+        </div>
+
+        <div className="">
+          <Link to={"/signup"}>
+            <p>Don't have an account ? signup!</p>
+          </Link>
         </div>
       </form>
     </div>

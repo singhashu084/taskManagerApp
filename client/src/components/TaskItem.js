@@ -47,7 +47,7 @@ const TaskItem = ({ task }) => {
           </div>
         </>
       ) : (
-        <TaskForm taskId={task} />
+        <TaskForm taskId={task} setIsEditing={setIsEditing} />
       )}
     </div>
   );

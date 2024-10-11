@@ -3,12 +3,12 @@ import { createTask, getTask } from "../redux/actions/tasks";
 import { useDispatch } from "react-redux";
 import { getAllUsers, updateTask } from "../services/api";
 
-const TaskForm = ({ taskId }) => {
+const TaskForm = ({ taskId, setIsEditing }) => {
   console.log("taskId", taskId);
   const [formData, setFormData] = useState({
     title: taskId ? taskId.title : "",
     description: taskId ? taskId.description : "",
-    dueDate: taskId ? taskId.dueDate : "",
+    dueDate: taskId ? new Date(taskId.dueDate).toISOString().split("T")[0] : "",
     assignedTo: taskId ? taskId.assignedTo : "",
     status: taskId ? taskId.status : "",
   });
@@ -22,11 +22,15 @@ const TaskForm = ({ taskId }) => {
     });
   };
 
+  useEffect(() => {
+    console.log("formData", formData);
+  }, [formData]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     try {
       if (taskId) {
-        updateTask(taskId, formData);
+        updateTask(taskId._id, formData);
       } else {
         dispatch(createTask(formData));
       }
@@ -40,6 +44,7 @@ const TaskForm = ({ taskId }) => {
         assignedTo: "",
         status: "",
       });
+      setIsEditing(false);
     }
   };
 
@@ -138,6 +143,16 @@ const TaskForm = ({ taskId }) => {
             {taskId ? "Update Task" : "Add Task"}
           </button>
         </div>
+        {taskId && (
+          <div className="my-2">
+            <button
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              onClick={() => setIsEditing(false)}
+            >
+              Cancel
+            </button>
+          </div>
+        )}
       </form>
     </div>
   );

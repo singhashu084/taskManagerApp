@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { signup } from "../services/api";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -82,6 +82,11 @@ const Signup = () => {
           >
             Sign Up
           </button>
+        </div>
+        <div className="">
+          <Link to={"/login"}>
+            <p>Already have an account ? Login!</p>
+          </Link>
         </div>
       </form>
     </div>
