@@ -20,10 +20,6 @@ const Login = () => {
     });
   };
 
-  useEffect(() => {
-    console.log("state", state);
-  }, [state]);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {

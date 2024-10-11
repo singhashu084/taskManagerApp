@@ -4,13 +4,12 @@ import { useDispatch } from "react-redux";
 import { getAllUsers, updateTask } from "../services/api";
 
 const TaskForm = ({ taskId, setIsEditing }) => {
-  console.log("taskId", taskId);
   const [formData, setFormData] = useState({
     title: taskId ? taskId.title : "",
     description: taskId ? taskId.description : "",
     dueDate: taskId ? new Date(taskId.dueDate).toISOString().split("T")[0] : "",
     assignedTo: taskId ? taskId.assignedTo : "",
-    status: taskId ? taskId.status : "",
+    status: taskId ? taskId.status : "pending",
   });
   const [otherUsers, setOtherUsers] = useState([]);
   const dispatch = useDispatch();
@@ -21,10 +20,6 @@ const TaskForm = ({ taskId, setIsEditing }) => {
       [e.target.name]: e.target.value,
     });
   };
-
-  useEffect(() => {
-    console.log("formData", formData);
-  }, [formData]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -42,9 +37,11 @@ const TaskForm = ({ taskId, setIsEditing }) => {
         description: "",
         dueDate: "",
         assignedTo: "",
-        status: "",
+        status: "pending",
       });
-      setIsEditing(false);
+      if (taskId) {
+        setIsEditing(false);
+      }
     }
   };
 

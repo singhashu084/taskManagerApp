@@ -3,7 +3,6 @@ import { deleteTask } from "../services/api";
 import TaskForm from "./TaskForm";
 
 const TaskItem = ({ task }) => {
-  console.log("task00000000", task);
   const [isEditing, setIsEditing] = useState(false);
   const deleteHandler = (id) => {
     deleteTask(task._id);
